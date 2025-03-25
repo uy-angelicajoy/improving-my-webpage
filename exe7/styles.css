@@ -17,7 +17,7 @@ body {
   background-size: cover;
   color: white;
 }
-
+ 
 .back {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 15px;
@@ -61,8 +61,8 @@ h1 {
 
 .box-2 img {
   padding: 10px;
-  height: 150px;
-  width: 200px;
+  height: 250px;
+  width: 300px;
   max-width: 100%;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -78,7 +78,7 @@ h1 {
 }
 
 .box-2:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
 }
 
 .box-2:last-child {
@@ -95,7 +95,7 @@ h1 {
 }
 
 .box-3:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
 }
 
 .box-3:last-child {
@@ -106,7 +106,7 @@ h1 {
   font-family: "Times New Roman", Times, serif;
   font-size: 30px;
   color: #4a90e2;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .font-2 {
@@ -155,30 +155,32 @@ a:hover {
 }
 
 /* Contact Form Styles */
-.contact-form {
-  background: #fff;
-  padding: 20px;
-  display: grid;
+#contact-section {
   grid-template-columns: 1fr 2fr;
   gap: 20px;
   width: 93%;
+  margin-bottom: 10px;
+  padding: 20px;
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
 }
 
-.contact-container:hover {
-  transform: translateY(-3px);
+#contact-section:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-#contact_align {
+.contact-container {
   display: flex;
-  justify-content: column;
-  gap: 50%;
-  margin: 0 auto;
+  justify-content: center;
+  gap: 5%;
 }
 
 .contact-info {
+  display: flex;
+  flex-direction: column;
   gap: 15px;
 }
 
@@ -187,7 +189,6 @@ a:hover {
   background: linear-gradient(135deg, #ebe5e5, #b6b4b4);
   padding: 15px;
   border-radius: 8px;
-  width: 170%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
@@ -197,42 +198,47 @@ a:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+.contact-contents {
+  display: flex;
+  background: linear-gradient(135deg, #ebe5e5, #b6b4b4);
+  padding: 15px;
+  border-radius: 8px;
+  width: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.contact-contents:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 .contact-text h3 {
   margin-bottom: 5px;
 }
 
-form {
-  background: linear-gradient(135deg, #ebe5e5, #b6b4b4);
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  width: 250%;
-  transition: all 0.3s ease;
+.contact-item ul li {
+  margin-left: 10px;
 }
 
-form:hover {
-  transform: translateY(-3px);
+.form-info {
+  margin-bottom: 15px;
 }
 
-.form-group :is(input, textarea) {
-  width: 100%;
+.form-info label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-info :is(input, textarea) {
+  width: 260%;
   padding: 12px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   font-family: inherit;
   transition: all 0.3s ease;
   background-color: #fff;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #555;
 }
 
 .form-input {
@@ -243,24 +249,9 @@ label {
   box-sizing: border-box;
 }
 
-.name-fields {
-  display: flex;
-  gap: 15px;
-}
-
-.name-fields > div {
-  flex: 1;
-}
-
-.number-field {
-  position: relative;
-}
-
 .button {
-  display: flex;
   gap: 10px;
-  margin-top: 20px;
-  justify-content: flex-end;
+  align-items: center;
 }
 
 .btn {
@@ -289,16 +280,6 @@ label {
 .btn:disabled {
   background-color: #bdc3c7;
   cursor: not-allowed;
-}
-
-.form-row {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.form-row > div {
-  flex: 1;
 }
 
 /* Goals Section Styles */
@@ -331,343 +312,415 @@ label {
   margin-left: 10px;
 }
 
-.comment-form {
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group :is(input, textarea) {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.comment-section {
   margin-top: 30px;
   border-top: 1px solid #eee;
   padding-top: 20px;
 }
 
+.comment-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.comment-section textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Responsive Design */
+/* Mobile S */
 @media (max-width: 320px) {
-  body {
-    padding: 10px;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
   #content {
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
   }
 
   .box, .box-2, .box-3 {
     width: 100%;
+    max-width: 500px;
   }
 
-  .box:last-child, .box-2:last-child, .box-3:last-child {
+  .box-2 img {
+    height: 200px;
+    width: 250px;
+  }
+
+  #contact-section {
     width: 100%;
+    max-width: 500px;
   }
 
-  .font {
-    font-size: 20px;
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .font-2 {
-    font-size: 14px;
-  }
-
-  ul, ol {
-    max-width: 100%;
-  }
-
-  .contact-form {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .contact-item {
+  .contact-info, .contact-contents {
     width: 100%;
+    max-width: 500px;
   }
 
-  form {
-    width: 100%;
+  .contact-contents {
+    margin-top: 10px;
+  }
+
+  .form-info :is(input, textarea) {
+    width: 105%;
   }
 
   .goal-info {
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
   }
 
   .goal-item {
     width: 100%;
-  }
-
-  .button {
-    flex-direction: column;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .btn {
-    width: 100%;
+    max-width: 500px;
+    margin-bottom: 15px;
   }
 }
 
+/* Mobile M */
 @media (min-width: 321px) and (max-width: 375px) {
-  body {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-
   #content {
     flex-direction: column;
-    gap: 15px;
+    align-items: center;
   }
 
   .box, .box-2, .box-3 {
     width: 100%;
+    max-width: 500px;
   }
 
-  .box:last-child, .box-2:last-child, .box-3:last-child {
+  .box-2 img {
+    height: 290px;
+    width: 340px;
+  }
+
+  ul,
+  ol {
+    max-width: 90%;
+  }
+
+  #contact-section {
     width: 100%;
+    max-width: 500px;
   }
 
-  .font {
-    font-size: 24px;
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .font-2 {
-    font-size: 16px;
-  }
-
-  ul, ol {
-    max-width: 100%;
-  }
-
-  .contact-form {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .contact-item {
+  .contact-info, .contact-contents {
     width: 100%;
+    max-width: 500px;
   }
 
-  form {
-    width: 100%;
+  .contact-contents {
+    margin-top: 10px;
+  }
+
+  .form-info :is(input, textarea) {
+    width: 130%;
   }
 
   .goal-info {
     flex-direction: column;
-    gap: 15px;
+    align-items: center;
   }
 
   .goal-item {
     width: 100%;
-  }
-
-  .button {
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
-  }
-
-  .btn {
-    width: 100%;
+    max-width: 500px;
+    margin-bottom: 15px;
   }
 }
-
+/* Mobile L */
 @media (min-width: 376px) and (max-width: 425px) {
-  body {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 30px;
-  }
-
   #content {
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
   }
 
   .box, .box-2, .box-3 {
     width: 100%;
+    max-width: 500px;
   }
 
-  .box:last-child, .box-2:last-child, .box-3:last-child {
+  .box-2 img {
+    height: 300px;
+    width: 350px;
+  }
+
+  ul,
+  ol {
+    max-width: 90%;
+  }
+
+  #contact-section {
     width: 100%;
+    max-width: 500px;
   }
 
-  .font {
-    font-size: 26px;
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .font-2 {
-    font-size: 18px;
-  }
-
-  ul, ol {
-    max-width: 100%;
-  }
-
-  .contact-form {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .contact-item {
+  .contact-info, .contact-contents {
     width: 100%;
+    max-width: 500px;
   }
 
-  form {
-    width: 100%;
+  .contact-contents {
+    margin-top: 10px;
+  }
+
+  .form-info :is(input, textarea) {
+    width: 160%;
   }
 
   .goal-info {
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
   }
 
   .goal-item {
     width: 100%;
-  }
-
-  .button {
-    flex-direction: column;
-    gap: 20px;
-    justify-content: center;
-  }
-
-  .btn {
-    width: 100%;
+    max-width: 500px;
+    margin-bottom: 15px;
   }
 }
 
+/* Tablet */
 @media (min-width: 426px) and (max-width: 768px) {
   body {
     padding: 20px;
   }
 
   h1 {
-    font-size: 32px;
+    font-size: 30px;
   }
 
-  #content {
-    flex-direction: column;
-    gap: 20px;
+  .box {
+    width: 30%;
+    padding: 20px;
   }
 
-  .box, .box-2, .box-3 {
+  .box:last-child {
     width: 100%;
   }
 
-  .box:last-child, .box-2:last-child, .box-3:last-child {
+  .box-2, .box-3 {
     width: 100%;
+    max-width: 990px;
   }
 
-  .font {
-    font-size: 28px;
+  .box-2 img {
+    height: 300px;
+    width: 350px;
   }
 
-  .font-2 {
-    font-size: 20px;
+  ul,
+  ol {
+    max-width: 90%;
   }
 
-  ul, ol {
-    max-width: 100%;
-  }
-
-  .contact-form {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .contact-item {
+  #contact-section {
     width: 100%;
+    max-width: 990px;
   }
 
-  form {
+  .contact-container {
+    margin-top: -50px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .contact-info, .contact-contents {
     width: 100%;
+    max-width: 300px;
+  }
+
+  .contact-contents {
+    margin-top: 10px;
+  }
+
+  .form-info :is(input, textarea) {
+    width: 140%;
   }
 
   .goal-info {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
+    align-items: center;
   }
 
   .goal-item {
     width: 100%;
-  }
-
-  .button {
-    flex-direction: column;
-    gap: 20px;
-    justify-content: center;
-  }
-
-  .btn {
-    width: 100%;
+    max-width: 300px;
+    margin-bottom: 15px;
   }
 }
 
+/* Laptop */
 @media (min-width: 769px) and (max-width: 1024px) {
   body {
     padding: 20px;
   }
 
   h1 {
-    font-size: 36px;
-  }
-
-  #content {
-    flex-direction: row;
-    gap: 20px;
-  }
-
-  .box, .box-2, .box-3 {
-    width: 300px;
-  }
-
-  .box:last-child, .box-2:last-child, .box-3:last-child {
-    width: 500px;
-  }
-
-  .font {
     font-size: 30px;
   }
 
-  .font-2 {
-    font-size: 18px;
+  .box {
+    width: 30%;
+    padding: 20px;
   }
 
-  ul, ol {
-    max-width: 200px;
+  .box:last-child {
+    width: 100%;
   }
 
-  .contact-form {
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
+  .box-2, .box-3 {
+    width: 100%;
+    max-width: 970px;
   }
 
-  .contact-item {
-    width: 170%;
+  .box-2 img {
+    height: 200px;
+    width: 250px;
   }
 
-  form {
-    width: 250%;
+  ul,
+  ol {
+    max-width: 90%;
+  }
+
+  #contact-section {
+    width: 100%;
+    max-width: 970px;
+  }
+
+  .contact-container {
+    margin-top: -50px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .contact-info, .contact-contents {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .contact-contents {
+    margin-top: 10px;
+  }
+
+  .form-info :is(input, textarea) {
+    width: 215%;
   }
 
   .goal-info {
     flex-direction: row;
-    gap: 5%;
+    align-items: center;
   }
 
   .goal-item {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  body {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .box {
     width: 30%;
+    padding: 20px;
   }
 
-  .button {
+  .box:last-child {
+    width: 100%;
+  }
+
+  .box-2, .box-3 {
+    width: 100%;
+    max-width: 1180px;
+  }
+
+  .box-2 img {
+    height: 200px;
+    width: 250px;
+  }
+
+  ul,
+  ol {
+    max-width: 90%;
+  }
+
+  #contact-section {
+    width: 100%;
+    max-width: 1180px;
+  }
+
+  .contact-container {
+    margin-top: -50px;
     flex-direction: row;
-    gap: 10px;
-    justify-content: flex-end;
+    align-items: center;
   }
 
-  .btn {
-    width: auto;
+  .contact-info, .contact-contents {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .contact-contents {
+    margin-top: 10px;
+  }
+
+  .form-info :is(input, textarea) {
+    width: 240%;
+  }
+
+  .goal-info {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .goal-item {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 15px;
   }
 }
