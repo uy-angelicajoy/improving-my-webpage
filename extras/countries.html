@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries of the World</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .search-container {
+            display: flex;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .search-container input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+        .search-container button {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .search-container button:hover {
+            background-color: #2980b9;
+        }
+        #loading {
+            text-align: center;
+            display: none;
+            margin: 30px 0;
+            font-size: 18px;
+        }
+        #error {
+            background-color: #ffdddd;
+            color: #d8000c;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        #country-details {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .country-header {
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        @media (min-width: 768px) {
+            .country-header {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+        .flag-container {
+            flex: 0 0 300px;
+            margin-right: 30px;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 768px) {
+            .flag-container {
+                margin-bottom: 0;
+            }
+        }
+        .flag-container img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #eaeaea;
+            border-radius: 4px;
+        }
+        .country-name h2 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        .country-name p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        .country-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .info-item {
+            margin-bottom: 15px;
+        }
+        .info-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        .info-item p {
+            color: #34495e;
+        }
+        #region-countries {
+            display: none;
+        }
+        #region-countries h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .country-card {
+            background-color: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .country-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        .country-card h3 {
+            padding: 15px;
+            font-size: 1.1rem;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #initial-message {
+            text-align: center;
+            padding: 50px 0;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Countries of the World</h1>
+        </header>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Enter a country name...">
+            <button id="search-button">Search</button>
+        </div>
+        
+        <div id="loading">Searching for country...</div>
+        <div id="error"></div>
+        
+        <div id="initial-message">
+            Enter a country name in the search box above to get started!
+        </div>
+        
+        <div id="country-details">
+            <div class="country-header">
+                <div class="flag-container">
+                    <img id="country-flag" src="" alt="Country flag">
+                </div>
+                <div class="country-name">
+                    <h2 id="country-common-name"></h2>
+                    <p id="country-official-name"></p>
+                </div>
+            </div>
+            <div class="country-info">
+                <div class="info-item">
+                    <h3>Capital</h3>
+                    <p id="country-capital"></p>
+                </div>
+                <div class="info-item">
+                    <h3>Region</h3>
+                    <p id="country-region"></p>
+                </div>
+                <div class="info-item">
+                    <h3>Population</h3>
+                    <p id="country-population"></p>
+                </div>
+                <div class="info-item">
+                    <h3>Languages</h3>
+                    <p id="country-languages"></p>
+                </div>
+                <div class="info-item">
+                    <h3>Currencies</h3>
+                    <p id="country-currencies"></p>
+                </div>
+                <div class="info-item">
+                    <h3>Area</h3>
+                    <p id="country-area"></p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="region-countries">
+            <h2 id="region-title">Other Countries in Region</h2>
+            <div class="countries-grid" id="countries-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const loadingElement = document.getElementById('loading');
+        const errorElement = document.getElementById('error');
+        const countryDetails = document.getElementById('country-details');
+        const regionCountries = document.getElementById('region-countries');
+        const initialMessage = document.getElementById('initial-message');
+        
+        // Flag and country information elements
+        const countryFlag = document.getElementById('country-flag');
+        const countryCommonName = document.getElementById('country-common-name');
+        const countryOfficialName = document.getElementById('country-official-name');
+        const countryCapital = document.getElementById('country-capital');
+        const countryRegion = document.getElementById('country-region');
+        const countryPopulation = document.getElementById('country-population');
+        const countryLanguages = document.getElementById('country-languages');
+        const countryCurrencies = document.getElementById('country-currencies');
+        const countryArea = document.getElementById('country-area');
+        
+        // Region information elements
+        const regionTitle = document.getElementById('region-title');
+        const countriesGrid = document.getElementById('countries-grid');
+        
+        // Format population numbers with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+        // Format languages object into a readable string
+        function formatLanguages(languages) {
+            if (!languages) return 'N/A';
+            return Object.values(languages).join(', ');
+        }
+        
+        // Format currencies object into a readable string
+        function formatCurrencies(currencies) {
+            if (!currencies) return 'N/A';
+            return Object.values(currencies)
+                .map(currency => `${currency.name} (${currency.symbol || ''})`)
+                .join(', ');
+        }
+        
+        // Search for a country
+        async function searchCountry(countryName) {
+            // Reset UI
+            initialMessage.style.display = 'none';
+            loadingElement.style.display = 'block';
+            errorElement.style.display = 'none';
+            countryDetails.style.display = 'none';
+            regionCountries.style.display = 'none';
+            
+            try {
+                // First API request: Search for the country
+                const countryResponse = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
+                
+                if (!countryResponse.ok) {
+                    throw new Error('Country not found! Please try another search term.');
+                }
+                
+                const countryData = await countryResponse.json();
+                const country = countryData[0];
+                
+                // Display country details
+                displayCountryDetails(country);
+                
+                // Extract region for second API request
+                const region = country.region;
+                
+                // Second API request: Get countries from the same region
+                const regionResponse = await fetch(`https://restcountries.com/v3.1/region/${region}`);
+                
+                if (!regionResponse.ok) {
+                    throw new Error('Could not load region data.');
+                }
+                
+                const regionData = await regionResponse.json();
+                
+                // Display countries from the same region (excluding the selected country)
+                displayRegionCountries(regionData, country.cca3, region);
+                
+            } catch (error) {
+                // Display error message
+                errorElement.textContent = error.message;
+                errorElement.style.display = 'block';
+                initialMessage.style.display = 'block';
+            } finally {
+                // Hide loading indicator
+                loadingElement.style.display = 'none';
+            }
+        }
+        
+        // Display country details
+        function displayCountryDetails(country) {
+            // Set country flag
+            countryFlag.src = country.flags.svg || country.flags.png;
+            countryFlag.alt = `Flag of ${country.name.common}`;
+            
+            // Set country names
+            countryCommonName.textContent = country.name.common;
+            countryOfficialName.textContent = country.name.official;
+            
+            // Set country information
+            countryCapital.textContent = country.capital ? country.capital[0] : 'N/A';
+            countryRegion.textContent = country.subregion ? `${country.region} (${country.subregion})` : country.region;
+            countryPopulation.textContent = formatNumber(country.population);
+            countryLanguages.textContent = formatLanguages(country.languages);
+            countryCurrencies.textContent = formatCurrencies(country.currencies);
+            countryArea.textContent = country.area ? `${formatNumber(country.area)} km²` : 'N/A';
+            
+            // Show country details
+            countryDetails.style.display = 'block';
+        }
+        
+        // Display countries from the same region
+        function displayRegionCountries(regionData, currentCountryCode, regionName) {
+            // Clear previous countries
+            countriesGrid.innerHTML = '';
+            
+            // Update region title
+            regionTitle.textContent = `Other Countries in ${regionName}`;
+            
+            // Filter out current country and limit to 12 countries
+            const otherCountries = regionData
+                .filter(country => country.cca3 !== currentCountryCode)
+                .slice(0, 12);
+            
+            // Create country cards
+            otherCountries.forEach(country => {
+                const countryCard = document.createElement('div');
+                countryCard.className = 'country-card';
+                countryCard.innerHTML = `
+                    <img src="${country.flags.svg || country.flags.png}" alt="Flag of ${country.name.common}">
+                    <h3>${country.name.common}</h3>
+                `;
+                
+                // Add click event to search for this country
+                countryCard.addEventListener('click', () => {
+                    searchInput.value = country.name.common;
+                    searchCountry(country.name.common);
+                });
+                
+                countriesGrid.appendChild(countryCard);
+            });
+            
+            // Show region countries
+            regionCountries.style.display = 'block';
+        }
+        
+        // Event listeners
+        searchButton.addEventListener('click', () => {
+            const query = searchInput.value.trim();
+            if (query) {
+                searchCountry(query);
+            }
+        });
+        
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    searchCountry(query);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

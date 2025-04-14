@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries of the World</title>
+</head>
+<body>
+    <h1>Countries of the World</h1>
+    <div>
+        <input type="text" id="countryInput" placeholder="Enter country name">
+        <button id="searchButton">Search</button>
+    </div>
+    <div id="countryDetails"></div>
+    <div id="regionCountries"></div>
+
+    <script>
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const countryName = document.getElementById('countryInput').value;
+
+            // First API request
+            fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+                .then(response => response.json())
+                .then(data => {
+                    const country = data[0];
+                    const region = country.region;
+
+                    // Display country details
+                    document.getElementById('countryDetails').innerHTML = `
+                        <h2>${country.name.common} (${country.name.official})</h2>
+                        <p>Capital: ${country.capital[0]}</p>
+                        <p>Population: ${country.population}</p>
+                        <p>Area: ${country.area} km²</p>
+                        <p>Languages: ${Object.values(country.languages).join(', ')}</p>
+                    `;
+
+                    // Second API request
+                    return fetch(`https://restcountries.com/v3.1/region/${region}`);
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const countriesInRegion = data.map(country => country.name.common).join(', ');
+                    document.getElementById('regionCountries').innerHTML = `
+                        <h3>Other countries in ${region}:</h3>
+                        <p>${countriesInRegion}</p>
+                    `;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
